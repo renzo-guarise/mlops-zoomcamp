@@ -1,6 +1,5 @@
 import os
 import pickle
-import click
 import mlflow
 import optuna
 
@@ -8,7 +7,7 @@ from optuna.samplers import TPESampler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
-mlflow.set_tracking_uri("http://127.0.0.1:5003")
+mlflow.set_tracking_uri("http://127.0.0.1:5004")
 mlflow.set_experiment("random-forest-hyperopt")
 
 
@@ -16,18 +15,6 @@ def load_pickle(filename):
     with open(filename, "rb") as f_in:
         return pickle.load(f_in)
 
-
-@click.command()
-@click.option(
-    "--data_path",
-    default="./output",
-    help="Location where the processed NYC taxi trip data was saved"
-)
-@click.option(
-    "--num_trials",
-    default=10,
-    help="The number of parameter evaluations for the optimizer to explore"
-)
 def run_optimization(data_path: str, num_trials: int):
 
     X_train, y_train = load_pickle(os.path.join(data_path, "train.pkl"))
