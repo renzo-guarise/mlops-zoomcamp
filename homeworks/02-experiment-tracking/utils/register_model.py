@@ -64,9 +64,10 @@ def run_register_model(data_path: str, top_n: int):
         max_results=top_n,
         order_by=["metrics.rmse ASC"]
     )[0]
+    print("test_rmse:",best_run.data.metrics["test_rmse"])
 
     # Register the best model
-    mlflow.register_model( f"runs:/{best_run}/model" )
+    mlflow.register_model( f"runs:/{best_run.info.run_id}/model",name="best_model" )
 
 
 if __name__ == '__main__':

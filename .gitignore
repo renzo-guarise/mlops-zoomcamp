@@ -20,5 +20,6 @@ __pycache__/
 **terraform.tfstate*
 homework
 
-
+output/
 .DS_Store
+model
