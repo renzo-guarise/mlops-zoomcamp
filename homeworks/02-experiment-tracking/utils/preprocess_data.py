@@ -1,6 +1,6 @@
 import os
 import pickle
-import click
+import mlflow
 import pandas as pd
 
 from sklearn.feature_extraction import DictVectorizer

@@ -12,7 +12,7 @@ HPO_EXPERIMENT_NAME = "random-forest-hyperopt"
 EXPERIMENT_NAME = "random-forest-best-models"
 RF_PARAMS = ['max_depth', 'n_estimators', 'min_samples_split', 'min_samples_leaf', 'random_state', 'n_jobs']
 
-mlflow.set_tracking_uri("http://127.0.0.1:5004")
+mlflow.set_tracking_uri("http://127.0.0.1:5006")
 mlflow.set_experiment(EXPERIMENT_NAME)
 mlflow.sklearn.autolog()
 
@@ -28,10 +28,10 @@ def train_and_log_model(data_path, params):
     X_test, y_test = load_pickle(os.path.join(data_path, "test.pkl"))
 
     with mlflow.start_run():
+        params_ = {}
         for param in RF_PARAMS:
-            params[param] = int(params[param])
-
-        rf = RandomForestRegressor(**params)
+            params_[param] = int(params[param])
+        rf = RandomForestRegressor(**params_)
         rf.fit(X_train, y_train)
 
         # Evaluate model on the validation and test sets

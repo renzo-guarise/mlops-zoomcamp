@@ -1,9 +1,12 @@
 import os
 import pickle
-
+import mlflow
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
+mlflow.set_tracking_uri("http://127.0.0.1:5005")
+mlflow.set_experiment("random-forest-first-run")
+mlflow.sklearn.autolog()
 
 def load_pickle(filename: str):
     with open(filename, "rb") as f_in:
