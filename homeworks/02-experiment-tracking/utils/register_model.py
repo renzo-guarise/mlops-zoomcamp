@@ -1,6 +1,5 @@
 import os
 import pickle
-import click
 import mlflow
 
 from mlflow.entities import ViewType
@@ -14,7 +13,7 @@ RF_PARAMS = ['max_depth', 'n_estimators', 'min_samples_split', 'min_samples_leaf
 
 mlflow.set_tracking_uri("http://127.0.0.1:7000")
 mlflow.set_experiment(EXPERIMENT_NAME)
-mlflow.sklearn.autolog(disable=True)
+mlflow.sklearn.autolog()
 
 
 def load_pickle(filename):
@@ -61,12 +60,12 @@ def run_register_model(data_path: str, top_n: int):
         experiment_ids=experiment.experiment_id,
         run_view_type=ViewType.ACTIVE_ONLY,
         max_results=top_n,
-        order_by=["metrics.rmse ASC"]
+        order_by=["metrics.test_rmse ASC"]
     )[0]
     print("test_rmse:",best_run.data.metrics["test_rmse"])
 
     # Register the best model
-    mlflow.register_model( f"runs:/{best_run.info.run_id}/model",name="best_model" )
+    mlflow.register_model( f"runs:/{best_run.info.run_id}/model",name="random-forest-best-model" )
 
 
 if __name__ == '__main__':
