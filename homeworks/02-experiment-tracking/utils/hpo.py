@@ -7,9 +7,9 @@ from optuna.samplers import TPESampler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
-mlflow.set_tracking_uri("http://127.0.0.1:5006")
+mlflow.set_tracking_uri("http://127.0.0.1:7000")
 mlflow.set_experiment("random-forest-hyperopt")
-mlflow.autolog(disable=True)
+mlflow.sklearn.autolog(disable=True)
 
 def load_pickle(filename):
     with open(filename, "rb") as f_in:
