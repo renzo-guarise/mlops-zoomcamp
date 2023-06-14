@@ -18,4 +18,10 @@ __pycache__/
 **.terraform/
 **.terraform.lock*
 **terraform.tfstate*
+<<<<<<< HEAD
 homework
+=======
+
+
+.DS_Store
+>>>>>>> a2fe60823aa124d869fe10431bb7de1a550a3a13
