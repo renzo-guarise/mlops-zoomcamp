@@ -43,10 +43,8 @@ def add_features(
     ]
 ):
     """Add features to the model"""
-    df_train["PU_DO"] = df_train["PULocationID"] + "_" + df_train["DOLocationID"]
-    df_val["PU_DO"] = df_val["PULocationID"] + "_" + df_val["DOLocationID"]
 
-    categorical = ["PU_DO"]  #'PULocationID', 'DOLocationID']
+    categorical = ['PULocationID', 'DOLocationID']
     numerical = ["trip_distance"]
 
     dv = DictVectorizer()
@@ -111,8 +109,8 @@ def train_best_model(
 
 @flow
 def main_flow(
-    train_path: str = "./data/green_tripdata_2021-01.parquet",
-    val_path: str = "./data/green_tripdata_2021-02.parquet",
+    train_path: str = "/Users/rguarise/Documents/mlops-zoomcamp/data/green_tripdata_2022-01.parquet",
+    val_path: str = "/Users/rguarise/Documents/mlops-zoomcamp/data/green_tripdata_2022-02.parquet",
 ) -> None:
     """The main training pipeline"""
 
