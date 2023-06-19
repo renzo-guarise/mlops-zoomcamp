@@ -147,7 +147,7 @@ def main_flow_homework(
     # MLflow settings
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("nyc-taxi-experiment")
-
+    email_send_message_task()
     # Load
     df_train = read_data(train_path)
     df_val = read_data(val_path)
