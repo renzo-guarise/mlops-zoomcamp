@@ -32,17 +32,6 @@ def read_data(filename: str) -> pd.DataFrame:
     return df
 
 @task
-def email_send_message_task():
-    email_server_credentials = EmailServerCredentials.load("email")
-    subject = email_send_message(
-        email_server_credentials=email_server_credentials,
-        subject="Flow Notification using Gmail",
-        msg="This proves email_send_message works!",
-        email_to="renzoguari99@gmail.com",
-    )
-    return subject
-
-@task
 def add_features(
     df_train: pd.DataFrame, df_val: pd.DataFrame
 ) -> tuple(
@@ -147,7 +136,13 @@ def main_flow_homework(
     # MLflow settings
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("nyc-taxi-experiment")
-    email_send_message_task()
+    email_server_credentials = EmailServerCredentials.load("email")
+    email_send_message(
+        email_server_credentials=email_server_credentials,
+        subject="Flow Notification using Gmail",
+        msg="This proves email_send_message works!",
+        email_to="renzoguari99@gmail.com",
+    )
     # Load
     df_train = read_data(train_path)
     df_val = read_data(val_path)
