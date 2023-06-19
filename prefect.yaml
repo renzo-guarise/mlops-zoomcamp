@@ -31,3 +31,8 @@ deployments:
   entrypoint: /Users/rguarise/Documents/mlops-zoomcamp/03-orchestration/3.5/orchestrate_s3.py:main_flow_s3
   work_pool:
     name: zoompool
+
+- name: taxi_local_data_homework
+  entrypoint: /Users/rguarise/Documents/mlops-zoomcamp/homeworks/03-orchestration/orchestrate.py:main_flow_homework
+  work_pool:
+    name: zoompool
