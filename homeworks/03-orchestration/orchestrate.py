@@ -12,7 +12,7 @@ from prefect import flow, task
 from prefect.artifacts import create_markdown_artifact
 from datetime import date
 from prefect_email import EmailServerCredentials,email_send_message
-email_server_credentials = EmailServerCredentials.load("email")
+
 
 @task(retries=3, retry_delay_seconds=2, name="Read taxi data")
 def read_data(filename: str) -> pd.DataFrame:
@@ -29,14 +29,18 @@ def read_data(filename: str) -> pd.DataFrame:
 
     categorical = ["PULocationID", "DOLocationID"]
     df[categorical] = df[categorical].astype(str)
+    return df
+
+@task
+def email_send_message_task():
+    email_server_credentials = EmailServerCredentials.load("email")
     subject = email_send_message(
         email_server_credentials=email_server_credentials,
         subject="Flow Notification using Gmail",
         msg="This proves email_send_message works!",
         email_to="renzoguari99@gmail.com",
     )
-    return df
-
+    return subject
 
 @task
 def add_features(
