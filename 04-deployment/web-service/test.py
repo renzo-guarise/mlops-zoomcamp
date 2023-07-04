@@ -7,5 +7,5 @@ ride = {
 }
 
 url = 'http://localhost:9696/predict'
-response = requests.post(url, json=ride)
+response = requests.get(url, json=ride)
 print(response.json())

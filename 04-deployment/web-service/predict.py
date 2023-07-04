@@ -2,7 +2,7 @@ import pickle
 
 from flask import Flask, request, jsonify
 
-with open('lin_reg.bin', 'rb') as f_in:
+with open('./lin_reg.bin', 'rb') as f_in:
     (dv, model) = pickle.load(f_in)
 
 
@@ -22,7 +22,7 @@ def predict(features):
 app = Flask('duration-prediction')
 
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET'])
 def predict_endpoint():
     ride = request.get_json()
 
